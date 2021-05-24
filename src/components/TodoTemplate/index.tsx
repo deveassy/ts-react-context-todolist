@@ -12,6 +12,10 @@ export default function TodoTemplate({
 const TodoTemplateBlock = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 90vh;
+  height: 80vh;
+  padding: 30px;
+  background-color: #fff;
+  border: 1px solid #000;
 `;

@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function TodoHeader({
-  children,
-}: {
+type HeaderProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default function TodoHeader(props: HeaderProps) {
+  const { children } = props;
   return (
     <TodoHeaderBlock>
       <TodolistTitle>{children}</TodolistTitle>
@@ -14,6 +15,8 @@ export default function TodoHeader({
   );
 }
 
-const TodoHeaderBlock = styled.header``;
+const TodoHeaderBlock = styled.header`
+  height: 10vw;
+`;
 const TodolistTitle = styled.h1``;
 const UncheckedTodo = styled.div``;

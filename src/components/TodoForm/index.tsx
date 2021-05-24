@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 export default function TodoForm() {
   return (
     <TodoFormBlock>
-      <TodoInput />
-      <TodoSubmitButton>ADD</TodoSubmitButton>
+      <FormContainer>
+        <TodoInput placeholder="I need to" />
+        <TodoSubmitButton type="submit">ADD</TodoSubmitButton>
+      </FormContainer>
     </TodoFormBlock>
   );
 }
@@ -16,6 +18,11 @@ const TodoFormBlock = styled.div`
   align-items: center;
 `;
 
-const TodoInput = styled.input``;
+const FormContainer = styled.form``;
+
+const TodoInput = styled.input`
+  width: 20vw;
+  padding: 5px;
+`;
 
 const TodoSubmitButton = styled.button``;
