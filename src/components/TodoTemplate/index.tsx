@@ -13,7 +13,7 @@ const TodoTemplateBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90vh;
+  width: 45vw;
   height: 80vh;
   padding: 30px;
   background-color: #fff;

@@ -14,4 +14,7 @@ export default function TodoList() {
   );
 }
 
-const TodoListBlock = styled.ul``;
+const TodoListBlock = styled.div`
+  height: 52vh;
+  overflow: scroll;
+`;

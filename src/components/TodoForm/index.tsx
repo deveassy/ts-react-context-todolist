@@ -13,6 +13,7 @@ export default function TodoForm() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (value === "") return;
     dispatch({
       type: "CREATE",
       text: value,
@@ -21,30 +22,34 @@ export default function TodoForm() {
   };
 
   return (
-    <TodoFormBlock>
-      <FormContainer onSubmit={onSubmit}>
-        <TodoInput
-          placeholder="I need to"
-          onChange={handleChange}
-          value={value}
-        />
-        <TodoSubmitButton type="submit">ADD</TodoSubmitButton>
-      </FormContainer>
+    <TodoFormBlock onSubmit={onSubmit}>
+      <TodoInput
+        placeholder="I need to"
+        onChange={handleChange}
+        value={value}
+      />
+      <TodoSubmitButton type="submit">ADD</TodoSubmitButton>
     </TodoFormBlock>
   );
 }
 
-const TodoFormBlock = styled.div`
+const TodoFormBlock = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
-
-const FormContainer = styled.form``;
 
 const TodoInput = styled.input`
   width: 20vw;
-  padding: 5px;
+  padding: 10px;
+  margin: 0 20px;
 `;
 
-const TodoSubmitButton = styled.button``;
+const TodoSubmitButton = styled.button`
+  padding: 20px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #f3d9fa;
+  cursor: pointer;
+`;

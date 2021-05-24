@@ -11,6 +11,9 @@ type Todo = {
 type ItemProps = {
   todo: Todo;
 };
+type ItemDoneProps = {
+  done: boolean;
+};
 
 export default function TodoItem({ todo }: ItemProps) {
   const dispatch = useDispatchContext();
@@ -30,11 +33,11 @@ export default function TodoItem({ todo }: ItemProps) {
   };
 
   return (
-    <TodoItemBlock>
+    <TodoItemBlock done={todo.done}>
       <TodoCheckButton onClick={onToggle}>
         {todo.done ? <CheckImg src="../img/check.png" /> : null}
       </TodoCheckButton>
-      <TodoText>{todo.text}</TodoText>
+      <TodoText done={todo.done}>{todo.text}</TodoText>
       <TodoRemoveButton onClick={onRemove}>
         <TrashImg src="../img/trash.png" />
       </TodoRemoveButton>
@@ -42,12 +45,12 @@ export default function TodoItem({ todo }: ItemProps) {
   );
 }
 
-const TodoItemBlock = styled.div`
+const TodoItemBlock = styled.div<ItemDoneProps>`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: #e4bad4;
-  width: 30vw;
+  background-color: ${(props) => (props.done ? "#dee2e6" : "#e4bad4")};
+  width: 40vw;
   padding: 10px;
   margin: 20px;
   &:hover {
@@ -73,9 +76,10 @@ const CheckImg = styled.img`
   height: 12px;
 `;
 
-const TodoText = styled.p`
+const TodoText = styled.p<ItemDoneProps>`
   width: 25vw;
   margin: 0 10px;
+  color: ${(props) => (props.done ? "#ccc" : "#000")};
   cursor: initial;
 `;
 
