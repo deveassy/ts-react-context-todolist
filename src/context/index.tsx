@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useReducer } from "react";
+import React, { createContext, Dispatch, useContext, useReducer } from "react";
 
 export type Todo = {
   id: number;
@@ -29,10 +29,8 @@ const initialState: Todo[] = [
   },
 ];
 
-export const StateContext = createContext<Todo[] | undefined>(undefined);
-export const DispatchContext = createContext<Dispatch<Action> | undefined>(
-  undefined
-);
+const StateContext = createContext<Todo[] | undefined>(undefined);
+const DispatchContext = createContext<Dispatch<Action> | undefined>(undefined);
 
 function TodoReducer(state: Todo[], action: Action) {
   switch (action.type) {
@@ -62,4 +60,16 @@ export function ContextProvider({ children }: { children: React.ReactNode }) {
       <StateContext.Provider value={todos}>{children}</StateContext.Provider>
     </DispatchContext.Provider>
   );
+}
+
+export function useStateContext() {
+  const todos = useContext(StateContext);
+  if (!todos) throw new Error("ContextProvider is not found");
+  return todos;
+}
+
+export function useDispatchContext() {
+  const dispatch = useContext(DispatchContext);
+  if (!dispatch) throw new Error("ContextProvider is not found");
+  return dispatch;
 }

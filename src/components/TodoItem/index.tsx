@@ -1,15 +1,41 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatchContext } from "../../context";
 
-export default function TodoItem() {
+type Todo = {
+  id: number;
+  text: string;
+  done: boolean;
+};
+
+type ItemProps = {
+  todo: Todo;
+};
+
+export default function TodoItem({ todo }: ItemProps) {
+  const dispatch = useDispatchContext();
+
+  const onToggle = () => {
+    dispatch({
+      type: "TOGGLE",
+      id: todo.id,
+    });
+  };
+
+  const onRemove = () => {
+    dispatch({
+      type: "REMOVE",
+      id: todo.id,
+    });
+  };
+
   return (
     <TodoItemBlock>
-      <TodoCheckButton>
-        {/* {todo.done ? <CheckImg src="../img/check.png" /> : null} */}
-        <CheckImg src="../img/check.png" />
+      <TodoCheckButton onClick={onToggle}>
+        {todo.done ? <CheckImg src="../img/check.png" /> : null}
       </TodoCheckButton>
-      <TodoText>I have to do something today.</TodoText>
-      <TodoRemoveButton>
+      <TodoText>{todo.text}</TodoText>
+      <TodoRemoveButton onClick={onRemove}>
         <TrashImg src="../img/trash.png" />
       </TodoRemoveButton>
     </TodoItemBlock>
